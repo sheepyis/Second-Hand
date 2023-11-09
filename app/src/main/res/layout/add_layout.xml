@@ -75,7 +75,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toBottomOf="@+id/imageView8"
-        app:srcCompat="@drawable/titleImage" />
+        />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -86,7 +86,7 @@
         app:layout_constraintHorizontal_bias="0.006"
         app:layout_constraintStart_toStartOf="@+id/editTextText"
         app:layout_constraintTop_toBottomOf="@+id/editTextText"
-        app:srcCompat="@drawable/contentImage" />
+        />
 
     <EditText
         android:id="@+id/editTextText2"
@@ -109,7 +109,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/editTextText2"
         app:layout_constraintTop_toBottomOf="@+id/editTextText2"
-        app:srcCompat="@drawable/costImage" />
+       />
 
     <EditText
         android:id="@+id/editTextText3"
