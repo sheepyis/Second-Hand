@@ -13,7 +13,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
         android:fontFamily="sans-serif"
-        android:text="사이다 님"
+        android:text="용복 님"
         android:textColor="#7EAD4F"
         android:textSize="34sp"
         android:textStyle="bold"
