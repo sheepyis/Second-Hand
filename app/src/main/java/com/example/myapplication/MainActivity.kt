@@ -9,6 +9,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.activity_main)
         // setContentView(R.layout.mypage)
-        setContentView(R.layout.chatlist)
+        // setContentView(R.layout.chatlist)
     }
 }
