@@ -146,8 +146,8 @@
 
     <Button
         android:id="@+id/productBack"
-        android:layout_width="15dp"
-        android:layout_height="20dp"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/productback"
         app:layout_constraintEnd_toStartOf="@+id/imageView6"

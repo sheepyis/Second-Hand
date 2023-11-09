@@ -111,18 +111,18 @@
                 <Button
                     android:id="@+id/sell"
                     android:layout_width="83dp"
-                    android:layout_height="29dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@drawable/round_profilebutton"
+                    android:backgroundTint="#67594C"
                     android:text="판매중"
                     android:textSize="13sp" />
 
                 <Button
                     android:id="@+id/soldout"
-                    android:layout_width="83dp"
-                    android:layout_height="29dp"
-                    android:layout_marginLeft="160dp"
-                    android:background="@drawable/round_profilebutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="150dp"
+                    android:backgroundTint="#67594C"
                     android:text="판매완료"
                     android:textSize="13sp" />
 
@@ -187,14 +187,14 @@
 
                     <Button
                         android:id="@+id/button10"
-                        android:layout_width="65dp"
-                        android:layout_height="23dp"
-                        android:background="@drawable/round_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:backgroundTint="#67594C"
                         android:text="판매중"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp"
                         android:translationX="10dp"
-                        android:translationY="75dp" />
+                        android:translationY="65dp" />
 
                     <TextView
                         android:id="@+id/productPrice"
@@ -204,8 +204,8 @@
                         android:textColor="#FFFFFF"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:translationX="85dp"
-                        android:translationY="78dp" />
+                        android:translationX="105dp"
+                        android:translationY="75dp" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -228,31 +228,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="292dp"
             android:layout_marginBottom="8dp"
             android:background="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/logout"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/prev" />
 
         <Button
             android:id="@+id/logout"
-            android:layout_width="66dp"
-            android:layout_height="23dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
-            android:background="@drawable/round_button"
+            android:backgroundTint="#67594C"
             android:text="로그아웃"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
