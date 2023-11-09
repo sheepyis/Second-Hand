@@ -7,36 +7,34 @@
     android:background="#FFFFFF">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/SignupText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="65dp"
         android:text="SIGNUP"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/join_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/join_name"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="50dp"
+        android:background="@drawable/rounded_edittext_bg"
         android:ems="10"
         android:hint="닉네임을 최대 8글자로 입력해주세요."
         android:inputType="textPersonName"
-        android:radius="50dp"
-        android:background="@drawable/rounded_edittext_bg"
         android:paddingLeft="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/join_email"
+        android:radius="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/join_password"
+        android:id="@+id/password"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="50dp"
@@ -45,24 +43,24 @@
         android:inputType="textPassword"
         android:paddingLeft="8dp"
         android:background="@drawable/rounded_edittext_bg"
-        app:layout_constraintBottom_toTopOf="@+id/join_pwck"
-        app:layout_constraintStart_toStartOf="@+id/textView11" />
+        app:layout_constraintBottom_toTopOf="@+id/password2"
+        app:layout_constraintStart_toStartOf="@+id/PasswordtextView" />
 
     <EditText
-        android:id="@+id/join_pwck"
+        android:id="@+id/password2"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="180dp"
+        android:layout_marginBottom="250dp"
         android:background="@drawable/rounded_edittext_bg"
         android:ems="10"
         android:hint="비밀번호를 한번 더 입력해주세요."
-        android:paddingLeft="8dp"
         android:inputType="textPassword"
+        android:paddingLeft="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView12" />
+        app:layout_constraintStart_toStartOf="@+id/PasswordtextView2" />
 
     <EditText
-        android:id="@+id/join_email"
+        android:id="@+id/email"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="50dp"
@@ -71,70 +69,66 @@
         android:hint="이메일을 입력해주세요."
         android:paddingLeft="8dp"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/join_password"
-        app:layout_constraintStart_toStartOf="@+id/textView10" />
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintStart_toStartOf="@+id/EmailtextView" />
 
     <Button
-        android:id="@+id/delete"
+        android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="71dp"
-        android:text="취소"
+        android:layout_marginTop="100dp"
         android:backgroundTint="@color/darkgreen"
-        app:layout_constraintStart_toEndOf="@+id/join_button"
-        app:layout_constraintTop_toBottomOf="@+id/join_pwck" />
+        android:text="취소"
+        app:layout_constraintStart_toEndOf="@+id/signup"
+        app:layout_constraintTop_toBottomOf="@+id/password2" />
 
     <Button
-        android:id="@+id/join_button"
+        android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
         android:layout_marginLeft="96dp"
         android:text="가입"
         android:backgroundTint="@color/darkgreen"
-        app:layout_constraintBaseline_toBaselineOf="@+id/delete"
+        app:layout_constraintBaseline_toBaselineOf="@+id/cancel"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/NametextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_marginBottom="8dp"
         android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/join_name"
-        app:layout_constraintStart_toStartOf="@+id/join_name"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintStart_toStartOf="@+id/join_name" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/EmailtextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="E-mail"
-        app:layout_constraintBottom_toTopOf="@+id/join_email"
+        app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintStart_toStartOf="@+id/join_name" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/PasswordtextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Password"
-        app:layout_constraintBottom_toTopOf="@+id/join_password"
-        app:layout_constraintStart_toStartOf="@+id/join_email" />
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintStart_toStartOf="@+id/email" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/PasswordtextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Password-Check"
-        app:layout_constraintBottom_toTopOf="@+id/join_pwck"
-        app:layout_constraintStart_toStartOf="@+id/join_password" />
+        app:layout_constraintBottom_toTopOf="@+id/password2"
+        app:layout_constraintStart_toStartOf="@+id/password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
