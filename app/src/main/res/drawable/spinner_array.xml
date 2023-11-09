@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string-array android:name="spinner_array">
+        <item>~10000</item>
+        <item>~20000</item>
+        <item>~30000</item>
+        <item>~40000</item>
+        <item>~50000</item>
+    </string-array>
+</resources>

@@ -111,18 +111,18 @@
                 <Button
                     android:id="@+id/sell"
                     android:layout_width="83dp"
-                    android:layout_height="29dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@drawable/round_profilebutton"
+                    android:backgroundTint="#67594C"
                     android:text="판매중"
                     android:textSize="13sp" />
 
                 <Button
                     android:id="@+id/soldout"
                     android:layout_width="83dp"
-                    android:layout_height="29dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="160dp"
-                    android:background="@drawable/round_profilebutton"
+                    android:backgroundTint="#67594C"
                     android:text="판매완료"
                     android:textSize="13sp" />
 
@@ -188,8 +188,8 @@
                     <Button
                         android:id="@+id/button10"
                         android:layout_width="65dp"
-                        android:layout_height="23dp"
-                        android:background="@drawable/round_button"
+                        android:layout_height="40dp"
+                        android:backgroundTint="#67594C"
                         android:text="판매중"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp"
@@ -245,7 +245,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="4dp"
-            android:background="@drawable/round_button"
+            android:backgroundTint="#67594C"
             android:text="로그아웃"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
