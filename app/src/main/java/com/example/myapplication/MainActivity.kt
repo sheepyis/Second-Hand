@@ -10,14 +10,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
-
-        val spinner = findViewById<Spinner>(R.id.spinner)
-        val adapter = ArrayAdapter.createFromResource(
-            this,
-            R.array.spinner_array,
-            R.layout.home
-        )
-        adapter.setDropDownViewResource(R.layout.home)
-        spinner.adapter = adapter
     }
 }
