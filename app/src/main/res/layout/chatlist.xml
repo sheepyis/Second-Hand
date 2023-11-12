@@ -40,31 +40,26 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="292dp"
             android:layout_marginBottom="8dp"
             android:background="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/logout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/prev" />
 
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="66dp"
-            android:layout_height="23dp"
-            android:layout_marginTop="25dp"
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="331dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-
-            android:backgroundTint="#67594C"
-            android:text="000님"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/prev"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/myprofile" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
