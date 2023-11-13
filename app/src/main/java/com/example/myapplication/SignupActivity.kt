@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -33,6 +34,13 @@ class SignupActivity : AppCompatActivity() {
             } else {
                 createUser(emailText, passwordText)
             }
+        }
+
+        val cancelButton = findViewById<Button>(R.id.cancel)
+        cancelButton.setOnClickListener {
+            // LoginActivity로 이동하기 위한 인텐트 생성
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
 
     }
