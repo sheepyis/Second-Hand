@@ -34,7 +34,7 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="0dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/darkgreen"
         android:text="시작하기"
