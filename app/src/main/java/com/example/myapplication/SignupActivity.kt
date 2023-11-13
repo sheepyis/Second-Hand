@@ -50,7 +50,13 @@ class SignupActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                    // 추가적인 작업 수행 (예: 데이터베이스에 사용자 정보 저장)
+
+                    val handler = android.os.Handler()
+                    handler.postDelayed({
+                        // 1초 후에 LoginActivity로 리다이렉션
+                        val intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
+                    }, 1000)
                 } else {
                     Toast.makeText(this, "회원가입 실패: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
