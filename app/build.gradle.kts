@@ -2,8 +2,11 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d3c36a7b001b699cb58ac1a7ee97cfe81e30930e
     id("com.google.firebase.crashlytics")
 
 }
@@ -52,6 +55,8 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 }
