@@ -2,11 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
-<<<<<<< HEAD
-
-
-=======
->>>>>>> d3c36a7b001b699cb58ac1a7ee97cfe81e30930e
     id("com.google.firebase.crashlytics")
 
 }
