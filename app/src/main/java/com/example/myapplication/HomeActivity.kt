@@ -23,7 +23,8 @@ class HomeActivity : AppCompatActivity() {
         nicknameTextView = findViewById(R.id.textView)
 
         val currentUserEmail = Firebase.auth.currentUser?.email
-        nicknameTextView.text = "${currentUserEmail}님"
+        val nickname = currentUserEmail?.substringBefore('@')
+        nicknameTextView.text = "${nickname}님"
         displayImage()
 
         val remoteConfig = Firebase.remoteConfig
