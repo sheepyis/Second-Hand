@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-
 }
 
 android {
@@ -53,5 +52,5 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
 }
