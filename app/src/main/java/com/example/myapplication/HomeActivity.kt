@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import android.graphics.BitmapFactory
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -57,6 +58,13 @@ class HomeActivity : AppCompatActivity() {
                 val SecondHands = remoteConfig.getBoolean("SecondHands")
                 textView12.text = "{$SecondHands}"
             }
+
+
+        val imageButton2 = findViewById<ImageButton>(R.id.imageButton2)
+        imageButton2.setOnClickListener {
+            val intent = Intent(this, AddActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun displayImage() {
