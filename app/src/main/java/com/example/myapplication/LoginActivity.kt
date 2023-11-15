@@ -32,7 +32,10 @@ class LoginActivity : AppCompatActivity() {
             Firebase.auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        // 회원 로그인 성공, HomeActivity로 이동, 닉네임 정보 전달
+                        val nickname = intent.getStringExtra("NICKNAME")
                         val intent = Intent(this, HomeActivity::class.java)
+                        intent.putExtra("NICKNAME", nickname)
                         startActivity(intent)
                     } else {
                         Toast.makeText(this, "입력한 회원 정보가 없습니다. 다시 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -40,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
         val signupButton = findViewById<TextView>(R.id.signText)
-            signupButton.setOnClickListener {
+        signupButton.setOnClickListener {
             // SignupActivity로 이동하기 위한 인텐트 생성
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
