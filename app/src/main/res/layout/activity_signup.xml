@@ -13,13 +13,13 @@
         android:text="SIGNUP"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/join_name"
+        app:layout_constraintBottom_toTopOf="@+id/nickname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/join_name"
+        android:id="@+id/nickname"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="50dp"
@@ -100,8 +100,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/join_name"
-        app:layout_constraintStart_toStartOf="@+id/join_name" />
+        app:layout_constraintBottom_toTopOf="@+id/nickname"
+        app:layout_constraintStart_toStartOf="@+id/nickname" />
 
     <TextView
         android:id="@+id/EmailtextView"
@@ -110,7 +110,7 @@
         android:layout_marginBottom="8dp"
         android:text="E-mail"
         app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintStart_toStartOf="@+id/join_name" />
+        app:layout_constraintStart_toStartOf="@+id/nickname" />
 
     <TextView
         android:id="@+id/PasswordtextView"

@@ -19,11 +19,15 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
+//
+//        nicknameTextView = findViewById(R.id.textView)
+//
+//        val currentUserEmail = Firebase.auth.currentUser?.email
+//        val nickname = currentUserEmail?.substringBefore('@')
+//        nicknameTextView.text = "${nickname}님"
 
+        val nickname = intent.getStringExtra("NICKNAME")
         nicknameTextView = findViewById(R.id.textView)
-
-        val currentUserEmail = Firebase.auth.currentUser?.email
-        val nickname = currentUserEmail?.substringBefore('@')
         nicknameTextView.text = "${nickname}님"
         displayImage()
 
