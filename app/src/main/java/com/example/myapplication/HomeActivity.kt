@@ -65,6 +65,12 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, AddActivity::class.java)
             startActivity(intent)
         }
+
+        val imageButton3 = findViewById<ImageButton>(R.id.imageButton3)
+        imageButton3.setOnClickListener{
+            val chatIntent = Intent(this, ChatActivity::class.java)
+            startActivity(chatIntent)
+        }
     }
 
     fun displayImage() {
