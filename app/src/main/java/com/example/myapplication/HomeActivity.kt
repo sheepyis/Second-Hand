@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.graphics.BitmapFactory
@@ -8,8 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
@@ -19,11 +24,38 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var nicknameTextView: TextView
     private lateinit var firestore: FirebaseFirestore
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var productAdapter: ProductAdapter
+    private lateinit var productList: MutableList<Product>
+
+    private val db: FirebaseFirestore = Firebase.firestore
+    private val itemsCollectionRef = db.collection("product")
+    private var snapshotListener: ListenerRegistration? = null
+
+    private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)}
+    private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)}
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
-
         firestore = FirebaseFirestore.getInstance()
+
+        recyclerView = findViewById(R.id.recyclerview)
+        productList = mutableListOf()
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        productAdapter = ProductAdapter(productList)
+        productAdapter?.setOnItemClickListener {
+            queryItem(it)
+        }
+
+
+        //productAdapter?.setOnItemClickListener {
+        //    queryItem(it)
+        //}
+
+
 
         // 홈 화면에서 닉네임 표시
         val user = Firebase.auth.currentUser
@@ -58,19 +90,27 @@ class HomeActivity : AppCompatActivity() {
                 val SecondHands = remoteConfig.getBoolean("SecondHands")
                 textView12.text = "{$SecondHands}"
             }
-
-
+    // 페이지 이동 버튼들
         val imageButton2 = findViewById<ImageButton>(R.id.imageButton2)
         imageButton2.setOnClickListener {
             val intent = Intent(this, AddActivity::class.java)
             startActivity(intent)
         }
-
         val imageButton3 = findViewById<ImageButton>(R.id.imageButton3)
         imageButton3.setOnClickListener{
-            val chatIntent = Intent(this, ChatActivity::class.java)
+            val chatIntent = Intent(this, ChatlistActivity::class.java)
             startActivity(chatIntent)
         }
+
+    }
+
+    private fun queryItem(itemID: String) {
+        itemsCollectionRef.document(itemID).get()
+            .addOnSuccessListener {
+                titleTextView.setText(it["name"].toString())
+                priceTextView.setText(it["price"].toString())
+            }.addOnFailureListener {
+            }
     }
 
     fun displayImage() {
