@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.google.firebase.storage.ktx.storage
-data class Product(val title: String, val detail: String, val price: Int)
+
 class HomeActivity : AppCompatActivity() {
     private lateinit var nicknameTextView: TextView
     private lateinit var firestore: FirebaseFirestore
@@ -26,7 +27,13 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var productAdapter: ProductAdapter
     private lateinit var productList: MutableList<Product>
-    private lateinit var db: FirebaseFirestore
+
+    private val db: FirebaseFirestore = Firebase.firestore
+    private val itemsCollectionRef = db.collection("product")
+    private var snapshotListener: ListenerRegistration? = null
+
+    private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)}
+    private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +49,11 @@ class HomeActivity : AppCompatActivity() {
         productAdapter?.setOnItemClickListener {
             queryItem(it)
         }
+
+
+        //productAdapter?.setOnItemClickListener {
+        //    queryItem(it)
+        //}
 
 
 
@@ -78,36 +90,29 @@ class HomeActivity : AppCompatActivity() {
                 val SecondHands = remoteConfig.getBoolean("SecondHands")
                 textView12.text = "{$SecondHands}"
             }
-
-
-
     // 페이지 이동 버튼들
         val imageButton2 = findViewById<ImageButton>(R.id.imageButton2)
         imageButton2.setOnClickListener {
             val intent = Intent(this, AddActivity::class.java)
             startActivity(intent)
         }
-
         val imageButton3 = findViewById<ImageButton>(R.id.imageButton3)
         imageButton3.setOnClickListener{
-            val chatIntent = Intent(this, ChatActivity::class.java)
+            val chatIntent = Intent(this, ChatlistActivity::class.java)
             startActivity(chatIntent)
         }
 
     }
+
     private fun queryItem(itemID: String) {
-        db = FirebaseFirestore.getInstance()
-        val productCollectionRef = db.collection("product")
-        productCollectionRef.document(itemID).get()
+        itemsCollectionRef.document(itemID).get()
             .addOnSuccessListener {
-                editID.setText(it.id)
-                checkAutoID.isChecked = false
-                editID.isEnabled = true
-                editItemName.setText(it["name"].toString())
-                editPrice.setText(it["price"].toString())
+                titleTextView.setText(it["name"].toString())
+                priceTextView.setText(it["price"].toString())
             }.addOnFailureListener {
             }
     }
+
     fun displayImage() {
         val storageRef = Firebase.storage.reference
         val imageRef = Firebase.storage.getReferenceFromUrl(

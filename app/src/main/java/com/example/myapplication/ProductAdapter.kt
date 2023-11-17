@@ -3,10 +3,20 @@ package com.example.myapplication
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
-class ProductAdapter(private val productList: List<Product>) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+data class Product(val title: String, val detail: String, val price: Int)
+class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+class ProductAdapter(private var productList: List<Product>)
+    : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+    fun interface OnItemClickListener {
+        fun onItemClick(product_id: String)
+    }
+    private var itemClickListener: OnItemClickListener? = null
+    fun setOnItemClickListener(listener : OnItemClickListener) {
+        itemClickListener = listener
+    }
 
     class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.productTitle)
