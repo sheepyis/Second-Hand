@@ -41,6 +41,11 @@
         <activity
             android:name=".ChatActivity">
         </activity>
+
+        <activity
+            android:name=".ChatlistActivity">
+        </activity>
+
     </application>
 
 </manifest>
