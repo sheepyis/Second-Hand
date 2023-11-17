@@ -35,7 +35,6 @@ class AddActivity : AppCompatActivity() {
 
         addButton.setOnClickListener {
             val userId = firebaseAuth.currentUser?.uid
-
             if (userId != null) {
                 db.collection("users").document(userId).get().addOnSuccessListener { documentSnapshot ->
                     val nickname = documentSnapshot.getString("nickname")
