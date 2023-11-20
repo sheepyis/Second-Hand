@@ -46,15 +46,12 @@ class HomeActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         productAdapter = ProductAdapter(productList)
+
         productAdapter?.setOnItemClickListener {
             queryItem(it)
         }
 
-
-        //productAdapter?.setOnItemClickListener {
-        //    queryItem(it)
-        //}
-
+        recyclerView.adapter=productAdapter
 
 
         // 홈 화면에서 닉네임 표시
