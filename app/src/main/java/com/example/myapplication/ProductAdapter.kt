@@ -1,39 +1,50 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-data class Product(val title: String, val detail: String, val price: Int)
+import com.google.firebase.firestore.QueryDocumentSnapshot
+
+data class Product(val title: String, val detail: String, val price: Int){
+    constructor(doc: QueryDocumentSnapshot) :
+            this(doc.id, doc["title"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
+    constructor(key: String, map: Map<*, *>) :
+            this(key, map["title"].toString(), map["price"].toString().toIntOrNull() ?: 0)
+}
 class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view)
-class ProductAdapter(private var productList: List<Product>)
-    : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
-    fun interface OnItemClickListener {
+
+class ProductAdapter(private val context: Context, private var productList: List<Product>) : RecyclerView.Adapter<MyViewHolder>() {
+    // 인터페이스 선언을 외부로 빼내어 사용할 수 있도록 수정
+    interface OnItemClickListener {
         fun onItemClick(product_id: String)
     }
+
     private var itemClickListener: OnItemClickListener? = null
-    fun setOnItemClickListener(listener : OnItemClickListener) {
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
         itemClickListener = listener
     }
-
-    class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val titleTextView: TextView = view.findViewById(R.id.productTitle)
-        val detailTextView: TextView = view.findViewById(R.id.productPrice)
-        val priceTextView: TextView = view.findViewById(R.id.productPrice)
+    fun updateList(newList: List<Product>) {
+        productList = newList
+        notifyDataSetChanged()
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder  {
+        val inflater = LayoutInflater.from(parent.context)
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product, parent, false)
-        return ProductViewHolder(view)
+        return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val product = productList[position]
-        holder.titleTextView.text = product.title
-        holder.detailTextView.text = product.detail
-        holder.priceTextView.text = product.price.toString()
+        holder.view.findViewById<TextView>(R.id.productTitle).text = product.title
+        holder.view.findViewById<TextView>(R.id.productSeller).text = product.detail
     }
+
+
 
     override fun getItemCount() = productList.size
 }
