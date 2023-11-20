@@ -69,10 +69,10 @@ class AddActivity : AppCompatActivity() {
                                     .addOnFailureListener {
                                         Toast.makeText(this,"상품 등록 실패: 모든 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
                                     }
-                                } else {
-                                Toast.makeText(this, "입력 필드를 모두 채워주세요.", Toast.LENGTH_SHORT).show()
-                                }
                             } else {
+                                Toast.makeText(this, "입력 필드를 모두 채워주세요.", Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
                             Toast.makeText(this, "사용자의 닉네임을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
                         }
                     }

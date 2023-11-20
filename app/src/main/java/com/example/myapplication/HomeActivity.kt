@@ -33,14 +33,15 @@ class HomeActivity : AppCompatActivity() {
     private var snapshotListener: ListenerRegistration? = null
 
 
-    private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)}
-    private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)}
+    private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)} //물건 제목
+    private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)} //물건 가격
+    private val sellerTextView by lazy {findViewById<TextView>(R.id.productSeller)} //물건 판매자
     private val textSnapshotListener by lazy { findViewById<TextView>(R.id.textSnapshotListener) }
 
     override fun onStart() {
         super.onStart()
 
-        // snapshot listener for all items
+        // 스냅샷 리스너 - 모든 물건 목록 띄움
         snapshotListener = itemsCollectionRef.addSnapshotListener { snapshot, error ->
             textSnapshotListener.text = StringBuilder().apply {
                 for (doc in snapshot!!.documentChanges) {
@@ -107,12 +108,7 @@ class HomeActivity : AppCompatActivity() {
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(R.xml.remote_config)
 
-        val textView12 = findViewById<TextView>(R.id.textView12)
-        remoteConfig.fetchAndActivate()
-            .addOnCompleteListener(this) {
-                val SecondHands = remoteConfig.getBoolean("SecondHands")
-                textView12.text = "{$SecondHands}"
-            }
+
     // 페이지 이동 버튼들
         val imageButton2 = findViewById<ImageButton>(R.id.imageButton2)
         imageButton2.setOnClickListener {
@@ -129,8 +125,9 @@ class HomeActivity : AppCompatActivity() {
     private fun queryItem(itemID: String) {
         itemsCollectionRef.document(itemID).get()
             .addOnSuccessListener {
-                titleTextView.text = it.getString("name")
+                titleTextView.text = it.getString("title")
                 priceTextView.text = it.getDouble("price")?.toString()
+                sellerTextView.text = it.getString("nickname")
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "아이템 조회 실패: $exception", Toast.LENGTH_SHORT).show()
