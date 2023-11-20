@@ -33,14 +33,15 @@ class HomeActivity : AppCompatActivity() {
     private var snapshotListener: ListenerRegistration? = null
 
 
-    private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)}
-    private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)}
+    private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)} //물건 제목
+    private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)} //물건 가격
+    private val sellerTextView by lazy {findViewById<TextView>(R.id.productSeller)} //물건 판매자
     private val textSnapshotListener by lazy { findViewById<TextView>(R.id.textSnapshotListener) }
 
     override fun onStart() {
         super.onStart()
 
-        // snapshot listener for all items
+        // 스냅샷 리스너 - 모든 물건 목록 띄움
         snapshotListener = itemsCollectionRef.addSnapshotListener { snapshot, error ->
             textSnapshotListener.text = StringBuilder().apply {
                 for (doc in snapshot!!.documentChanges) {
@@ -128,8 +129,9 @@ class HomeActivity : AppCompatActivity() {
     private fun queryItem(itemID: String) {
         itemsCollectionRef.document(itemID).get()
             .addOnSuccessListener {
-                titleTextView.text = it.getString("name")
+                titleTextView.text = it.getString("title")
                 priceTextView.text = it.getDouble("price")?.toString()
+                sellerTextView.text = it.getString("nickname") +"님"
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "아이템 조회 실패: $exception", Toast.LENGTH_SHORT).show()
