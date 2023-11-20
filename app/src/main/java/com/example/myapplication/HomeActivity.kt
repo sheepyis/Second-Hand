@@ -70,6 +70,7 @@ class HomeActivity : AppCompatActivity() {
         productList = mutableListOf()
 
         recyclerView.layoutManager = LinearLayoutManager(this)
+
         productAdapter = ProductAdapter(this, emptyList())
         productAdapter?.setOnItemClickListener(object : ProductAdapter.OnItemClickListener {
             override fun onItemClick(productId: String) {
