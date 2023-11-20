@@ -129,7 +129,7 @@ class HomeActivity : AppCompatActivity() {
                 titleTextView.text = it.getString("title")
                 priceTextView.text = it.getDouble("price")?.toString()
                 sellerTextView.text = it.getString("nickname")
-                productsold.text = it.getString("productsold")
+                productsold.text = it.getBoolean("sale").toString()
 
             }
             .addOnFailureListener { exception ->

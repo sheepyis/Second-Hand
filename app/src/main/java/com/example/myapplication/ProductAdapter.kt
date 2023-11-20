@@ -8,12 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
-data class Product(val title: String, val nickname: String, val price: Int){
+data class Product(val title: String, val nickname: String, val price: Int, val sold: String){
     constructor(doc: QueryDocumentSnapshot) :
-            this(doc["title"].toString(),doc["nickname"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
+            this(doc["title"].toString(),doc["nickname"].toString(), doc["price"].toString().toIntOrNull() ?: 0,
+                doc["sale"].toString()
+            )
     //this(doc.id, doc["title"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
-    constructor(key: String, map: Map<*, *>) :
-            this(key, map["title"].toString(), map["price"].toString().toIntOrNull() ?: 0)
+    //constructor(key: String, map: Map<*, *>) :
+            //this(key, map["title"].toString(), map["price"].toString().toIntOrNull() ?: 0)
 }
 class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
@@ -44,6 +46,13 @@ class ProductAdapter(private val context: Context, private var productList: List
         holder.view.findViewById<TextView>(R.id.productTitle).text = product.title
         holder.view.findViewById<TextView>(R.id.productSeller).text = product.nickname
         holder.view.findViewById<TextView>(R.id.productPrice).text = product.price.toString()
+        if(product.sold.equals("true"))
+        {
+            holder.view.findViewById<TextView>(R.id.productsoldout).text = "판매중"
+        }else{
+            holder.view.findViewById<TextView>(R.id.productsoldout).text = "판매완료"
+        }
+
     }
 
 
