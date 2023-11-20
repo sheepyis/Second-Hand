@@ -108,12 +108,7 @@ class HomeActivity : AppCompatActivity() {
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(R.xml.remote_config)
 
-        val textView12 = findViewById<TextView>(R.id.textView12)
-        remoteConfig.fetchAndActivate()
-            .addOnCompleteListener(this) {
-                val SecondHands = remoteConfig.getBoolean("SecondHands")
-                textView12.text = "{$SecondHands}"
-            }
+
     // 페이지 이동 버튼들
         val imageButton2 = findViewById<ImageButton>(R.id.imageButton2)
         imageButton2.setOnClickListener {
@@ -132,7 +127,7 @@ class HomeActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 titleTextView.text = it.getString("title")
                 priceTextView.text = it.getDouble("price")?.toString()
-                sellerTextView.text = it.getString("nickname") +"님"
+                sellerTextView.text = it.getString("nickname")
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "아이템 조회 실패: $exception", Toast.LENGTH_SHORT).show()

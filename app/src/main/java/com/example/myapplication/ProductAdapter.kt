@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
-data class Product(val title: String, val seller: String, val price: Int){
+data class Product(val title: String, val nickname: String, val price: Int){
     constructor(doc: QueryDocumentSnapshot) :
-            this(doc["title"].toString(),doc["seller"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
+            this(doc["title"].toString(),doc["nickname"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
     //this(doc.id, doc["title"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
     constructor(key: String, map: Map<*, *>) :
             this(key, map["title"].toString(), map["price"].toString().toIntOrNull() ?: 0)
@@ -42,7 +42,7 @@ class ProductAdapter(private val context: Context, private var productList: List
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val product = productList[position]
         holder.view.findViewById<TextView>(R.id.productTitle).text = product.title
-        holder.view.findViewById<TextView>(R.id.productSeller).text = product.seller
+        holder.view.findViewById<TextView>(R.id.productSeller).text = product.nickname
         holder.view.findViewById<TextView>(R.id.productPrice).text = product.price.toString()
     }
 
