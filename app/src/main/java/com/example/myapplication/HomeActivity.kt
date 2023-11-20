@@ -33,6 +33,7 @@ class HomeActivity : AppCompatActivity() {
     private var snapshotListener: ListenerRegistration? = null
 
 
+    private val productsold by lazy {findViewById<TextView>(R.id.productsoldout)} //판매 여부
     private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)} //물건 제목
     private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)} //물건 가격
     private val sellerTextView by lazy {findViewById<TextView>(R.id.productSeller)} //물건 판매자
@@ -128,6 +129,8 @@ class HomeActivity : AppCompatActivity() {
                 titleTextView.text = it.getString("title")
                 priceTextView.text = it.getDouble("price")?.toString()
                 sellerTextView.text = it.getString("nickname")
+                productsold.text = it.getString("productsold")
+
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "아이템 조회 실패: $exception", Toast.LENGTH_SHORT).show()
