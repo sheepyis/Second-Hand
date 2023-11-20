@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +52,16 @@ class ProductAdapter(private val context: Context, private var productList: List
             holder.view.findViewById<TextView>(R.id.productsoldout).text = "판매중"
         }else{
             holder.view.findViewById<TextView>(R.id.productsoldout).text = "판매완료"
+        }
+
+        // 클릭 이벤트 처리
+        holder.view.setOnClickListener {
+            // 클릭한 아이템의 판매자 닉네임을 가져옴
+            val sellerNickname = product.nickname
+            // 채팅 액티비티로 이동하고, sellerNickname을 전달
+            val intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra("sellerNickname", sellerNickname)
+            context.startActivity(intent)
         }
 
     }
