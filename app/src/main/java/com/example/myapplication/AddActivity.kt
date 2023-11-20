@@ -56,7 +56,8 @@ class AddActivity : AppCompatActivity() {
                                     "title" to title,
                                     "detail" to detail,
                                     "price" to price,
-                                    "nickname" to nickname
+                                    "nickname" to nickname,
+                                    "sale" to true
                                 )
 
                                 productCollectionRef.add(itemMap)
