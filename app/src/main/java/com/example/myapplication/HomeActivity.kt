@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.graphics.BitmapFactory
@@ -21,19 +20,45 @@ import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.google.firebase.storage.ktx.storage
 
 class HomeActivity : AppCompatActivity() {
+
     private lateinit var nicknameTextView: TextView
     private lateinit var firestore: FirebaseFirestore
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var productAdapter: ProductAdapter
+    private var productAdapter: ProductAdapter? = null
     private lateinit var productList: MutableList<Product>
 
     private val db: FirebaseFirestore = Firebase.firestore
     private val itemsCollectionRef = db.collection("product")
     private var snapshotListener: ListenerRegistration? = null
 
+
     private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)}
     private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)}
+    private val textSnapshotListener by lazy { findViewById<TextView>(R.id.textSnapshotListener) }
+
+    override fun onStart() {
+        super.onStart()
+
+        // snapshot listener for all items
+        snapshotListener = itemsCollectionRef.addSnapshotListener { snapshot, error ->
+            textSnapshotListener.text = StringBuilder().apply {
+                for (doc in snapshot!!.documentChanges) {
+                    append("${doc.type} ${doc.document.id} ${doc.document.data}")
+                }
+            }
+        }
+        // sanpshot listener for single item
+        /*
+        itemsCollectionRef.document("1").addSnapshotListener { snapshot, error ->
+            Log.d(TAG, "${snapshot?.id} ${snapshot?.data}")
+        }*/
+    }
+
+    override fun onStop() {
+        super.onStop()
+        snapshotListener?.remove()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,13 +70,15 @@ class HomeActivity : AppCompatActivity() {
         productList = mutableListOf()
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        productAdapter = ProductAdapter(productList)
 
-        productAdapter?.setOnItemClickListener {
-            queryItem(it)
-        }
-
-        recyclerView.adapter=productAdapter
+        productAdapter = ProductAdapter(this, emptyList())
+        productAdapter?.setOnItemClickListener(object : ProductAdapter.OnItemClickListener {
+            override fun onItemClick(productId: String) {
+                queryItem(productId)
+            }
+        })
+        recyclerView.adapter = productAdapter
+        updateList()
 
 
         // 홈 화면에서 닉네임 표시
@@ -71,7 +98,6 @@ class HomeActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "닉네임 불러오기 실패: $exception", Toast.LENGTH_SHORT).show()
             }
-
         displayImage()
 
         val remoteConfig = Firebase.remoteConfig
@@ -100,14 +126,28 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-
     private fun queryItem(itemID: String) {
         itemsCollectionRef.document(itemID).get()
             .addOnSuccessListener {
-                titleTextView.setText(it["name"].toString())
-                priceTextView.setText(it["price"].toString())
-            }.addOnFailureListener {
+                titleTextView.text = it.getString("name")
+                priceTextView.text = it.getDouble("price")?.toString()
             }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "아이템 조회 실패: $exception", Toast.LENGTH_SHORT).show()
+            }
+    }
+    private fun updateList() {
+        itemsCollectionRef.get().addOnSuccessListener {
+            val products = mutableListOf<Product>()
+            for (doc in it) {
+                products.add(Product(doc))
+            }
+            productAdapter?.updateList(products)
+        }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        snapshotListener?.remove()
     }
 
     fun displayImage() {
