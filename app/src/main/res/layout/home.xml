@@ -29,33 +29,34 @@
         android:width="93dp"
         android:height="29dp"
         android:background="@drawable/toggle_button"
-        android:textOff="판매된 상품"
+        android:textOff="판매중 상품"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        style="@style/Widget.AppCompat.Spinner.DropDown"
-        android:layout_width="93dp"
+
+    <ToggleButton
+        android:id="@+id/toggleButton2"
+        android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/spinner"
+        android:width="93dp"
+        android:height="29dp"
+        android:background="@drawable/toggle_button"
+        android:textOff="판매완료상품"
         app:layout_constraintStart_toEndOf="@+id/toggleButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+        app:layout_constraintTop_toTopOf="@+id/toggleButton" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="376dp"
         android:layout_height="315dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintHorizontal_bias="0.631"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -81,12 +82,9 @@
         android:id="@+id/imageView5"
         android:layout_width="72dp"
         android:layout_height="77dp"
-        android:layout_marginStart="85dp"
         android:layout_marginTop="84dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="39dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/darkgreen" />
 
@@ -94,9 +92,11 @@
         android:id="@+id/textSnapshotListener"
         android:layout_width="371dp"
         android:layout_height="112dp"
+        android:layout_marginTop="7dp"
         app:layout_constraintBottom_toTopOf="@+id/imageButton3"
         app:layout_constraintTop_toBottomOf="@+id/recyclerview"
-        tools:layout_editor_absoluteX="25dp" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="20dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
