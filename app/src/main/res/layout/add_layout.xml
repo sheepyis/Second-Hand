@@ -46,7 +46,7 @@
 
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginBottom="20dp"
@@ -54,7 +54,7 @@
         android:ems="10"
         android:inputType="text"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/editTextText2"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,12 +69,12 @@
         android:background="@drawable/addcontentview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.006"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText"
+        app:layout_constraintStart_toStartOf="@+id/textView1"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
         />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginTop="8dp"
@@ -93,8 +93,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/addcostview"
-        app:layout_constraintStart_toStartOf="@+id/editTextText2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
        />
 
     <EditText
