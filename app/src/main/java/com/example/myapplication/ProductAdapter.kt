@@ -12,7 +12,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 data class Product(val title: String, val nickname: String, val price: Int, val sold: String, val detail : String){
     constructor(doc: QueryDocumentSnapshot) :
             this(doc["title"].toString(),doc["nickname"].toString(), doc["price"].toString().toIntOrNull() ?: 0,
-                doc["sale"].toString(),doc["detail"].toString()
+                doc["sale"].toString(), doc["detail"].toString()
             )
     //this(doc.id, doc["title"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
     //constructor(key: String, map: Map<*, *>) :
@@ -58,7 +58,7 @@ class ProductAdapter(private val context: Context, private var productList: List
             val intent = Intent(context, ProductDetailActivity::class.java)
             intent.putExtra("seller", product.nickname)
             intent.putExtra("title",product.title)
-            intent.putExtra("price",product.price)
+            intent.putExtra("price",product.price.toString())
             intent.putExtra("sold",product.sold)
             intent.putExtra("detail",product.detail)
 
