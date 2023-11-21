@@ -7,5 +7,11 @@ class ProductUpdateActivity: AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.update_product)
+
+        val id =intent.getStringExtra("id")
+        val title = intent.getStringExtra("title")
+        val price = intent.getStringExtra("price")
+        val sold = intent.getStringExtra("sold")
+        val detail = intent.getStringExtra("detail")
     }
 }
