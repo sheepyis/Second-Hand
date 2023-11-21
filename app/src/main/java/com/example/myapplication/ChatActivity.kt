@@ -1,68 +1,94 @@
+// ChatActivity.kt
 package com.example.myapplication
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import com.google.firebase.messaging.FirebaseMessagingService
-import com.google.firebase.messaging.RemoteMessage
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 
-class ChatActivity : FirebaseMessagingService() {
+class ChatActivity : AppCompatActivity() {
 
-    override fun onNewToken(token: String) {
-        Log.d(TAG, "Refreshed token: $token")
-        // TODO: Implement this method to send any registration to your app's servers.
-        // sendRegistrationToServer(token)
-    }
+    private val db = FirebaseFirestore.getInstance()
+    private val messages = mutableListOf<Message>()
+    private lateinit var messageAdapter: MessageAdapter
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Log.d(TAG, "From: ${remoteMessage.from}")
-        Log.d(TAG, "Message data payload: ${remoteMessage.data}")
+    private lateinit var sellerNickname: String
+    private lateinit var recyclerView: RecyclerView
 
-        // Handle the received message here
-        showNotification(remoteMessage.notification?.title, remoteMessage.notification?.body)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_chat)
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun showNotification(title: String?, body: String?) {
-        val channelId = "firebase-messaging"
-        val channelName = "Firebase Messaging Channel"
-        createNotificationChannel(channelId, channelName)
+        // 채팅 상대방의 닉네임 가져오기
+        sellerNickname = intent.getStringExtra("sellerNickname") ?: ""
+        title = sellerNickname // 액션바에 상대방 닉네임 표시
 
-        val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setContentTitle(title)
-            .setContentText(body)
-            .setSmallIcon(R.drawable.chat_receive) // 작은 아이콘 추가
-            .setAutoCancel(true)
+        // Initialize RecyclerView and set up layout manager
+        recyclerView = findViewById(R.id.recyclerView) // 추가된 부분
+        messageAdapter = MessageAdapter(this, messages)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = messageAdapter
 
+        // Load messages from Firestore
+        loadMessages()
 
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val sendButton = findViewById<Button>(R.id.sendButton)
+        val messageEditText = findViewById<EditText>(R.id.messageEditText)
 
-        notificationManager.notify(0, notificationBuilder.build())
-    }
+        sendButton.setOnClickListener {
+            val sender = "User" // Replace with actual user identification
+            val content = messageEditText.text.toString().trim()
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(channelId: String, channelName: String) {
-        val channel = NotificationChannel(
-            channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT
-        ).apply {
-            description = "This is Firebase Messaging channel"
+            if (content.isNotEmpty()) {
+                val message = Message(sender, content, System.currentTimeMillis())
+                messageAdapter.addMessage(message)
+                saveMessage(message) // Firestore에 메시지 저장 로직 추가
+                messageEditText.text.clear()
+            }
         }
 
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        notificationManager.createNotificationChannel(channel)
-    }
-
-    companion object {
-        const val TAG = "MyFirebaseMessaging"
     }
 
 
+    private fun loadMessages() {
+        // Use Firestore query to load messages
+        db.collection("messages")
+            .whereEqualTo("sender", "User") // Filter messages by sender (User)
+            .whereEqualTo("recipient", sellerNickname) // Filter messages by recipient (Seller)
+            .addSnapshotListener { snapshot, exception ->
+                if (exception != null) {
+                    // Handle error
+                    return@addSnapshotListener
+                }
+
+                messages.clear()
+
+                for (document in snapshot!!.documents) {
+                    val sender = document.getString("sender") ?: ""
+                    val content = document.getString("content") ?: ""
+                    val timestamp = document.getLong("timestamp") ?: 0
+
+                    val message = Message(sender, content, timestamp)
+                    messages.add(message)
+                }
+
+                // Notify adapter after loading messages
+                messageAdapter.notifyDataSetChanged()
+            }
+    }
+
+    private fun saveMessage(message: Message) {
+        // Save a message to Firestore
+        db.collection("messages")
+            .add(message)
+            .addOnSuccessListener {
+                // Handle success, if needed
+            }
+            .addOnFailureListener {
+                // Handle failure, if needed
+            }
+    }
 }
