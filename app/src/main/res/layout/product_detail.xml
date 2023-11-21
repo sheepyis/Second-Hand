@@ -20,28 +20,29 @@
 
         <TextView
             android:id="@+id/productsoldout"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
             android:layout_marginTop="25dp"
-            android:layout_marginEnd="90dp"
+            android:layout_marginEnd="100dp"
             android:text="나무블록 침대 판매합니다."
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/costImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="60dp"
             app:srcCompat="@drawable/cost" />
 
         <TextView
             android:id="@+id/costText"
-            android:layout_width="wrap_content"
+            android:layout_width="92dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
+            android:layout_marginStart="80dp"
             android:layout_marginTop="58dp"
             android:layout_marginEnd="170dp"
             android:text="200000"
@@ -51,7 +52,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
+            android:layout_marginStart="160dp"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="150dp"
             android:text="원"
@@ -79,6 +80,7 @@
         android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/waring"
         tools:layout_editor_absoluteX="-8dp" />
 
@@ -107,34 +109,32 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
         android:text="판매자 : "
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/produceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         android:text="너구리 상점"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <Button
         android:id="@+id/chatButton"
         android:layout_width="300dp"
         android:layout_height="65dp"
-        android:layout_marginTop="648dp"
-        android:layout_marginEnd="56dp"
         android:backgroundTint="#7EAD4F"
         android:text="채팅하기"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
         android:id="@+id/productBack"
@@ -145,6 +145,17 @@
         android:background="@drawable/productback"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="님"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/produceName"
+        app:layout_constraintTop_toTopOf="@+id/produceName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

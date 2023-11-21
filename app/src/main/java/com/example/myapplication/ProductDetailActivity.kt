@@ -19,11 +19,11 @@ class ProductDetailActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.product_detail)
 
-        val title = intent.getStringExtra("title")
-        val seller = intent.getStringExtra("seller")
+        val title = intent.getStringExtra("title") //됨
+        val seller = intent.getStringExtra("seller") //됨
         val price = intent.getStringExtra("price")
-        val sold = intent.getStringExtra("sold")
-        val detail = intent.getStringExtra("detail")
+        val sold = intent.getStringExtra("sold") //됨
+        val detail = intent.getStringExtra("detail") //됨
 
         titleTextView.text = title
         priceTextView.text = price.toString()
