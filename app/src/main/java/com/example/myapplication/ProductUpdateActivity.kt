@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -24,7 +25,7 @@ class ProductUpdateActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.update_product)
 
-        val id = intent.getStringExtra("id")?:null//아이디 값 - 수정하기 할때 사용할꺼임
+        val id = intent.getStringExtra("id")//아이디 값 - 수정하기 할때 사용할꺼임
         var sold = intent.getStringExtra("sold")
 
         producttitle.text = intent.getStringExtra("title") //제목
@@ -70,6 +71,8 @@ class ProductUpdateActivity: AppCompatActivity() {
                     .update(itemMap)
                     .addOnSuccessListener {
                         Toast.makeText(this, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(this, "수정 완료에 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()

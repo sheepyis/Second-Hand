@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 data class Product(val title: String, val nickname: String, val price: Int, val sold: String, val detail : String, val id : String){
     constructor(doc: QueryDocumentSnapshot) :
             this(doc["title"].toString(),doc["nickname"].toString(), doc["price"].toString().toIntOrNull() ?: 0,
-                doc["sale"].toString(), doc["detail"].toString(), doc["id"].toString()
+                doc["sale"].toString(), doc["detail"].toString(), doc.id
             )
     //this(doc.id, doc["title"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
     //constructor(key: String, map: Map<*, *>) :
