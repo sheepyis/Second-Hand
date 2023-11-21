@@ -52,14 +52,14 @@
             android:label="@string/app_name">
         </activity>
 
-
-
-
         <activity
             android:name=".ChatlistActivity">
         </activity>
         <activity
             android:name=".ProductDetailActivity">
+        </activity>
+        <activity
+            android:name=".ProductUpdateActivity">
         </activity>
 
     </application>
