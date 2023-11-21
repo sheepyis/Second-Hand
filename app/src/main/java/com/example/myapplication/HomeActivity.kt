@@ -42,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        // 스냅샷 리스너 - 모든 물건 목록 띄움
+        //스냅샷 리스너 - 모든 물건 목록 띄움
         snapshotListener = itemsCollectionRef.addSnapshotListener { snapshot, error ->
             textSnapshotListener.text = StringBuilder().apply {
                 for (doc in snapshot!!.documentChanges) {
@@ -130,6 +130,7 @@ class HomeActivity : AppCompatActivity() {
                 priceTextView.text = it.getDouble("price")?.toString()
                 sellerTextView.text = it.getString("nickname")
                 productsold.text = it.getBoolean("sale").toString()
+                it.getString("detail")
 
             }
             .addOnFailureListener { exception ->

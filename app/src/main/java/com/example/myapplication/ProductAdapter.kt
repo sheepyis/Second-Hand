@@ -9,10 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
-data class Product(val title: String, val nickname: String, val price: Int, val sold: String){
+data class Product(val title: String, val nickname: String, val price: Int, val sold: String, val detail : String){
     constructor(doc: QueryDocumentSnapshot) :
             this(doc["title"].toString(),doc["nickname"].toString(), doc["price"].toString().toIntOrNull() ?: 0,
-                doc["sale"].toString()
+                doc["sale"].toString(),doc["detail"].toString()
             )
     //this(doc.id, doc["title"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
     //constructor(key: String, map: Map<*, *>) :
@@ -54,19 +54,18 @@ class ProductAdapter(private val context: Context, private var productList: List
             holder.view.findViewById<TextView>(R.id.productsoldout).text = "판매완료"
         }
 
-        // 클릭 이벤트 처리
         holder.view.setOnClickListener {
-            // 클릭한 아이템의 판매자 닉네임을 가져옴
-            val sellerNickname = product.nickname
-            // 채팅 액티비티로 이동하고, sellerNickname을 전달
-            val intent = Intent(context, ChatActivity::class.java)
-            intent.putExtra("sellerNickname", sellerNickname)
+            val intent = Intent(context, ProductDetailActivity::class.java)
+            intent.putExtra("seller", product.nickname)
+            intent.putExtra("title",product.title)
+            intent.putExtra("price",product.price)
+            intent.putExtra("sold",product.sold)
+            intent.putExtra("detail",product.detail)
+
+            //여기에 닉네임 같을때 수정하기 페이지로 이동하는 코드 추가해야 됨
             context.startActivity(intent)
         }
 
     }
-
-
-
     override fun getItemCount() = productList.size
 }
