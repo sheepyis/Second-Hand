@@ -58,6 +58,9 @@
         <activity
             android:name=".ChatlistActivity">
         </activity>
+        <activity
+            android:name=".ProductDetailActivity">
+        </activity>
 
     </application>
 
