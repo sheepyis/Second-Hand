@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +39,11 @@ class HomeActivity : AppCompatActivity() {
     private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)} //물건 가격
     private val sellerTextView by lazy {findViewById<TextView>(R.id.productSeller)} //물건 판매자
     private val textSnapshotListener by lazy { findViewById<TextView>(R.id.textSnapshotListener) }
+
+    private val filterButton by lazy { findViewById<ToggleButton>(R.id.toggleButton) }
+    private val Button by lazy { findViewById<ToggleButton>(R.id.toggleButton2) }
+    private var showfilterProduct : Boolean = false;
+    private var showProduct : Boolean = false;
 
     override fun onStart() {
         super.onStart()
@@ -81,6 +87,27 @@ class HomeActivity : AppCompatActivity() {
         })
         recyclerView.adapter = productAdapter
         updateList()
+
+        filterButton.setOnClickListener {
+            if(showfilterProduct){
+                showfilterProduct=!showfilterProduct
+                filterButton.text = "판매중 상품"
+            }else if(!showfilterProduct){
+                showfilterProduct=!showfilterProduct
+                filterButton.text="전체 상품"
+            }
+            updateList()
+        }
+        Button.setOnClickListener {
+            if(showProduct) {
+                showProduct = !showProduct
+                Button.text = "판매완료상품"
+            }else if(!showProduct){
+                showProduct = !showProduct
+                Button.text = "전체 상품"
+            }
+            updateList()
+        }
 
 
         // 홈 화면에서 닉네임 표시
@@ -140,8 +167,23 @@ class HomeActivity : AppCompatActivity() {
     private fun updateList() {
         itemsCollectionRef.get().addOnSuccessListener {
             val products = mutableListOf<Product>()
-            for (doc in it) {
-                products.add(Product(doc))
+            if(showfilterProduct){
+                for(doc in it){
+                    if(Product(doc).sold=="true"){
+                        products.add(Product(doc))
+                    }
+                }
+            }else if(showProduct){
+                for(doc in it){
+                    if(Product(doc).sold=="false"){
+                        products.add(Product(doc))
+                    }
+                }
+            }
+            else{
+                for (doc in it) {
+                    products.add(Product(doc))
+                }
             }
             productAdapter?.updateList(products)
         }
