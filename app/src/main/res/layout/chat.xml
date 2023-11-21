@@ -85,7 +85,7 @@
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/textView1"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -106,7 +106,7 @@
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextText"
+        app:layout_constraintStart_toEndOf="@+id/textView1"
         app:srcCompat="@android:drawable/ic_menu_send" />
 
     <TextView

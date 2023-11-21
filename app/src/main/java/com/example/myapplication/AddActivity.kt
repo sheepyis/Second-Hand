@@ -22,8 +22,8 @@ class AddActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_layout)
 
-        editTitle = findViewById(R.id.editTextText)
-        editDetail = findViewById(R.id.editTextText2)
+        editTitle = findViewById(R.id.textView1)
+        editDetail = findViewById(R.id.textView2)
         editPrice = findViewById(R.id.editTextText3)
 
         firebaseAuth = FirebaseAuth.getInstance()
