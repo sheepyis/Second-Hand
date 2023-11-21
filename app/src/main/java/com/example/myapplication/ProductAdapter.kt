@@ -12,10 +12,10 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
-data class Product(val title: String, val nickname: String, val price: Int, val sold: String, val detail : String){
+data class Product(val title: String, val nickname: String, val price: Int, val sold: String, val detail : String, val id : String){
     constructor(doc: QueryDocumentSnapshot) :
             this(doc["title"].toString(),doc["nickname"].toString(), doc["price"].toString().toIntOrNull() ?: 0,
-                doc["sale"].toString(), doc["detail"].toString()
+                doc["sale"].toString(), doc["detail"].toString(), doc["id"].toString()
             )
     //this(doc.id, doc["title"].toString(), doc["price"].toString().toIntOrNull() ?: 0)
     //constructor(key: String, map: Map<*, *>) :
@@ -75,6 +75,7 @@ class ProductAdapter(private val context: Context, private var productList: List
         holder.view.setOnClickListener {
             if(nickname != product.nickname){
                 val DetailIntent = Intent(context, ProductDetailActivity::class.java)
+                DetailIntent.putExtra("id",product.id)
                 DetailIntent.putExtra("seller", product.nickname)
                 DetailIntent.putExtra("title",product.title)
                 DetailIntent.putExtra("price",product.price.toString())
@@ -83,6 +84,7 @@ class ProductAdapter(private val context: Context, private var productList: List
                 context.startActivity(DetailIntent)
             }else{
                 val UpdateIntent = Intent(context,ProductUpdateActivity::class.java )
+                UpdateIntent.putExtra("id",product.id)
                 UpdateIntent.putExtra("title",product.title)
                 UpdateIntent.putExtra("price",product.price.toString())
                 UpdateIntent.putExtra("sold",product.sold)
