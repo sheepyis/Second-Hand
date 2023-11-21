@@ -9,91 +9,94 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="420dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="411dp"
+        android:layout_height="157dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="3dp"
         android:background="#7EAD4F"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/productsoldout"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="100dp"
-            android:text="나무블록 침대 판매합니다."
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/costImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="60dp"
-            app:srcCompat="@drawable/cost" />
-
-        <TextView
-            android:id="@+id/costText"
-            android:layout_width="92dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="58dp"
-            android:layout_marginEnd="170dp"
-            android:text="200000"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="150dp"
-            android:text="원"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/sale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
-            android:layout_marginTop="120dp"
-            android:layout_marginEnd="30dp"
-            android:text="판매중"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
     </FrameLayout>
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="420dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="406dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/chatButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/waring"
-        tools:layout_editor_absoluteX="-8dp" />
+        app:srcCompat="@drawable/waring" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="350dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="24dp"
-        android:text="미개봉 상품입니다. 원가 300,000원 주고 구매했습니다. 관심있으신 분은 저에게 채팅 보내주세요. 제가 멀리 살아서 택배 희망합니다. "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        android:id="@+id/productsoldout"
+        android:layout_width="227dp"
+        android:layout_height="24dp"
+        android:layout_gravity="top|end"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:text="나무블록 침대 판매합니다."
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/produceName" />
+        app:layout_constraintTop_toBottomOf="@+id/productBack" />
+
+    <ImageView
+        android:id="@+id/costImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="1dp"
+        android:translationX="5dp"
+        android:translationY="10dp"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/productsoldout"
+        app:srcCompat="@drawable/cost" />
+
+    <TextView
+        android:id="@+id/costText"
+        android:layout_width="37dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="2dp"
+        android:text="200"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:translationX="10dp"
+        android:translationY="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/costImage"
+        app:layout_constraintTop_toBottomOf="@+id/productsoldout" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:text="원"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/costText"
+        app:layout_constraintTop_toBottomOf="@+id/productsoldout" />
+
+    <TextView
+        android:id="@+id/sale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginStart="330dp"
+        android:layout_marginTop="100dp"
+        android:text="판매중"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -130,8 +133,10 @@
         android:id="@+id/chatButton"
         android:layout_width="300dp"
         android:layout_height="65dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="#7EAD4F"
         android:text="채팅하기"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -139,7 +144,7 @@
     <Button
         android:id="@+id/productBack"
         android:layout_width="14dp"
-        android:layout_height="14dp"
+        android:layout_height="20dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/productback"
@@ -156,6 +161,17 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/produceName"
         app:layout_constraintTop_toTopOf="@+id/produceName" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="340dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="50dp"
+        android:text="미개봉 상품입니다. 원가 300,000원 주고 구매했습니다. 관심있으신 분은 저에게 채팅 보내주세요. 제가 멀리 살아서 택배 희망합니다. "
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/produceName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
