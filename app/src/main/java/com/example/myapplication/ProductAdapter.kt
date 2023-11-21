@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 
 data class Product(val title: String, val nickname: String, val price: Int, val sold: String, val detail : String){
     constructor(doc: QueryDocumentSnapshot) :
@@ -42,6 +45,8 @@ class ProductAdapter(private val context: Context, private var productList: List
         return MyViewHolder(view)
     }
 
+    private lateinit var firestore: FirebaseFirestore
+    private var nickname :String = ""
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val product = productList[position]
         holder.view.findViewById<TextView>(R.id.productTitle).text = product.title
@@ -53,19 +58,39 @@ class ProductAdapter(private val context: Context, private var productList: List
         }else{
             holder.view.findViewById<TextView>(R.id.productsoldout).text = "판매완료"
         }
+        val user = Firebase.auth.currentUser
+        val userId = user?.uid ?: ""
+        firestore = FirebaseFirestore.getInstance()
+
+        firestore.collection("users")
+            .document(userId)
+            .get()
+            .addOnSuccessListener{ document ->
+                if(document !=null){
+                    nickname = document.getString("nickname")?:""
+                }
+
+            }
 
         holder.view.setOnClickListener {
-            val intent = Intent(context, ProductDetailActivity::class.java)
-            intent.putExtra("seller", product.nickname)
-            intent.putExtra("title",product.title)
-            intent.putExtra("price",product.price.toString())
-            intent.putExtra("sold",product.sold)
-            intent.putExtra("detail",product.detail)
-
-            //여기에 닉네임 같을때 수정하기 페이지로 이동하는 코드 추가해야 됨
-            context.startActivity(intent)
+            if(nickname != product.nickname){
+                val DetailIntent = Intent(context, ProductDetailActivity::class.java)
+                DetailIntent.putExtra("seller", product.nickname)
+                DetailIntent.putExtra("title",product.title)
+                DetailIntent.putExtra("price",product.price.toString())
+                DetailIntent.putExtra("sold",product.sold)
+                DetailIntent.putExtra("detail",product.detail)
+                context.startActivity(DetailIntent)
+            }else{
+                val UpdateIntent = Intent(context,ProductUpdateActivity::class.java )
+                UpdateIntent.putExtra("title",product.title)
+                UpdateIntent.putExtra("price",product.price.toString())
+                UpdateIntent.putExtra("sold",product.sold)
+                UpdateIntent.putExtra("detail",product.detail)
+                context.startActivity(UpdateIntent)
+            }
         }
-
     }
+
     override fun getItemCount() = productList.size
 }
