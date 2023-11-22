@@ -27,7 +27,7 @@ class MessageAdapter(private val context: Context, private val messagesList: Lis
         val currentItem = messagesList[position]
 
         holder.sender.text = "${currentItem.sender}님:"
-        //holder.product.text = currentItem.product
+        holder.product.text = currentItem.product
         holder.content.text = currentItem.content
     }
 
