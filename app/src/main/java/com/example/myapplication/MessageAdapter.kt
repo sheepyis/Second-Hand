@@ -13,11 +13,32 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
-
 class MessageAdapter(private val context: Context, private val messagesList: List<Message>) :
     RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
+
     private lateinit var firestore: FirebaseFirestore
-    lateinit var nickname: String
+    private lateinit var nickname: String
+
+    init {
+        // 어댑터 초기화 시에 닉네임을 가져옴
+        val user = Firebase.auth.currentUser
+        val userId = user?.uid ?: ""
+
+        firestore = FirebaseFirestore.getInstance()
+
+        firestore.collection("users")
+            .document(userId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    nickname = document.getString("nickname") ?: ""
+                    notifyDataSetChanged() // 어댑터를 업데이트
+                }
+            }
+            .addOnFailureListener { exception ->
+                // 오류 처리
+            }
+    }
 
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val sender: TextView = itemView.findViewById(R.id.sender)
@@ -31,23 +52,11 @@ class MessageAdapter(private val context: Context, private val messagesList: Lis
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        val user = Firebase.auth.currentUser
-        val userId = user?.uid ?: ""
+        // 닉네임이 초기화되지 않았으면 아무 작업도 하지 않음
+        if (!::nickname.isInitialized) return
 
-        firestore.collection("users")
-            .document(userId)
-            .get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    nickname = document.getString("nickname") ?: ""
-
-                }
-            }
-            .addOnFailureListener { exception ->
-                //Toast.makeText(this, "닉네임 불러오기 실패: $exception", Toast.LENGTH_SHORT).show()
-            }
         val currentItem = messagesList[position]
-        if(currentItem.receiver==nickname) {
+        if (currentItem.receiver == nickname) {
             holder.sender.text = "${currentItem.sender}님:"
             holder.product.text = currentItem.product
             holder.content.text = currentItem.content
