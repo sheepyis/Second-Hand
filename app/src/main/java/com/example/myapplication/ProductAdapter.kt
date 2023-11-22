@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
@@ -54,9 +55,13 @@ class ProductAdapter(private val context: Context, private var productList: List
         holder.view.findViewById<TextView>(R.id.productPrice).text = product.price.toString()
         if(product.sold.equals("true"))
         {
+            holder.view.findViewById<ImageView>(R.id.imageView4).setImageResource(R.drawable.proc)
             holder.view.findViewById<TextView>(R.id.productsoldout).text = "판매중"
+
         }else{
+            holder.view.findViewById<ImageView>(R.id.imageView4).setImageResource(R.drawable.backgroundimagesold)
             holder.view.findViewById<TextView>(R.id.productsoldout).text = "판매완료"
+
         }
         val user = Firebase.auth.currentUser
         val userId = user?.uid ?: ""
