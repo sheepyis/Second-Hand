@@ -36,6 +36,7 @@ class ProductDetailActivity : AppCompatActivity(){
         chatButton.setOnClickListener {
             val intent = Intent(this@ProductDetailActivity, ChatActivity::class.java)
             intent.putExtra("sellerNickname", seller)
+            intent.putExtra("productTitle", title)
             startActivity(intent)
         }
     }

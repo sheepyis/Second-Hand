@@ -42,6 +42,8 @@ class ChatActivity : AppCompatActivity() {
 
         val user = Firebase.auth.currentUser
         val userId = user?.uid ?: ""
+        val sellerNickname = intent.getStringExtra("sellerNickname")
+        val productTitle = intent.getStringExtra("productTitle")
 
         firestore.collection("users")
             .document(userId)
@@ -61,9 +63,11 @@ class ChatActivity : AppCompatActivity() {
         sendButton.setOnClickListener {
             val sender = nickname // Replace with actual user identification
             val content = messageEditText.text.toString().trim()
+            val receiver = sellerNickname.toString()
+            val product =productTitle.toString()
 
             if (content.isNotEmpty()) {
-                val message = Message(sender, content, System.currentTimeMillis())
+                val message = Message(sender, receiver, product, content, System.currentTimeMillis())
                 //messageAdapter.addMessage(message)
                 saveMessage(message) // Firestore에 메시지 저장 로직 추가
                 messageEditText.text.clear()
@@ -88,10 +92,12 @@ class ChatActivity : AppCompatActivity() {
 
                 for (document in snapshot!!.documents) {
                     val sender = document.getString("sender") ?: ""
+                    val receiver = document.getString("receiver") ?: ""
+                    val product = document.getString("product") ?: ""
                     val content = document.getString("content") ?: ""
                     val timestamp = document.getLong("timestamp") ?: 0
 
-                    val message = Message(sender, content, timestamp)
+                    val message = Message(sender, receiver, product, content, timestamp)
                     messages.add(message)
                 }
 

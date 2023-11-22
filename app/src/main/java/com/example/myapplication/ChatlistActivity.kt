@@ -37,10 +37,12 @@ class ChatlistActivity : AppCompatActivity() {
 
                 for (document in querySnapshot) {
                     val sender = document.getString("sender") ?: "DefaultSender"
+                    val receiver = document.getString("receiver") ?: "DefaultReceiver"
+                    val product= document.getString("product") ?: "DefaultProduct"
                     val content = document.getString("content") ?: "DefaultContent"
                     val timestamp = document.getLong("timestamp") ?: 0
 
-                    val message = Message(sender, content, timestamp)
+                    val message = Message(sender, receiver, product, content, timestamp)
                     messagesList.add(message)
                 }
 
