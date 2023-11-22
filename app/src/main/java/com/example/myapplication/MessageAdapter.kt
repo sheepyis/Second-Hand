@@ -61,7 +61,7 @@ class MessageAdapter(private val context: Context, private val messagesList: Lis
         if (currentItem.receiver == nickname) {
             holder.sender.text = "보낸 사람 : ${currentItem.sender}님"
             holder.product.text = currentItem.product
-            holder.content.text = currentItem.content
+            holder.content.text = "▷ ${currentItem.content}"
         }
         else {
             val params = holder.itemView.layoutParams as RecyclerView.LayoutParams
