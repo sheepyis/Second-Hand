@@ -1,11 +1,14 @@
 // ChatActivity.kt
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
@@ -18,10 +21,9 @@ class ChatActivity : AppCompatActivity() {
     private val messages = mutableListOf<Message>()
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var firestore: FirebaseFirestore
-
     private lateinit var nickname: String
-    private lateinit var recyclerView: RecyclerView
 
+    @SuppressLint("WrongViewCast", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -31,11 +33,7 @@ class ChatActivity : AppCompatActivity() {
         //sellerNickname = intent.getStringExtra("sellerNickname") ?: ""
         //title = sellerNickname // 액션바에 상대방 닉네임 표시
 
-        // Initialize RecyclerView and set up layout manager
-        recyclerView = findViewById(R.id.recyclerView) // 추가된 부분
         messageAdapter = MessageAdapter(this, messages)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = messageAdapter
 
         // Load messages from Firestore
         loadMessages()
@@ -57,8 +55,10 @@ class ChatActivity : AppCompatActivity() {
                 Toast.makeText(this, "닉네임 불러오기 실패: $exception", Toast.LENGTH_SHORT).show()
             }
 
-        val sendButton = findViewById<Button>(R.id.sendButton)
+        val sendButton = findViewById<AppCompatImageButton>(R.id.sendButton)
         val messageEditText = findViewById<EditText>(R.id.messageEditText)
+        val TotextView = findViewById<TextView>(R.id.TotextView)
+        TotextView.text = "${sellerNickname}님께 메세지 보내기"
 
         sendButton.setOnClickListener {
             val sender = nickname // Replace with actual user identification
