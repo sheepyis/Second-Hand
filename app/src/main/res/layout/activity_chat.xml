@@ -14,14 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="150dp"
 
+        android:layout_marginTop="100dp"
         android:fontFamily="sans-serif"
         android:text="Message"
         android:textColor="#7EAD4F"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/TotextView"
         app:layout_constraintStart_toStartOf="@+id/TotextView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,25 +28,27 @@
         android:id="@+id/messageEditText"
         android:layout_width="300dp"
         android:layout_height="400dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/chat_input"
         android:ems="10"
         android:gravity="top|start"
         android:hint="    Add a note"
         android:inputType="textMultiLine"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sendButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <ImageButton
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
+        android:layout_marginBottom="53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/messageEditText"
         app:layout_constraintTop_toBottomOf="@+id/messageEditText"
         app:srcCompat="@android:drawable/ic_menu_send" />
@@ -63,7 +64,8 @@
         android:typeface="normal"
         app:layout_constraintBottom_toTopOf="@+id/messageEditText"
         app:layout_constraintStart_toStartOf="@+id/messageEditText"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.515" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
