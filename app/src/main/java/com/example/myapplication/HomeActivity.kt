@@ -3,16 +3,12 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import android.graphics.BitmapFactory
-import android.view.View
-import android.widget.Adapter
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +20,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.google.firebase.storage.ktx.storage
+import android.view.View
+import android.widget.ArrayAdapter
 
 class HomeActivity : AppCompatActivity() {
 
@@ -43,6 +41,7 @@ class HomeActivity : AppCompatActivity() {
     private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)} //물건 제목
     private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)} //물건 가격
     private val sellerTextView by lazy {findViewById<TextView>(R.id.productSeller)} //물건 판매자
+
 
     private val filterButton by lazy {findViewById<Spinner>(R.id.filterButton)}
     private var filterSelectPosition: Int =0;
@@ -81,23 +80,22 @@ class HomeActivity : AppCompatActivity() {
         filterButton.adapter = filterAdapter
         filterButton.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-               when(p2){
-                   0->{
-                       filterSelectPosition =0
-                   }
-                   1->{
-                       filterSelectPosition=1
-                   }
-                   2->{
-                       filterSelectPosition=2
-                   }
-               }
+                when(p2){
+                    0->{
+                        filterSelectPosition =0
+                    }
+                    1->{
+                        filterSelectPosition=1
+                    }
+                    2->{
+                        filterSelectPosition=2
+                    }
+                }
                 updateList()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
-
 
         // 홈 화면에서 닉네임 표시
         val user = Firebase.auth.currentUser
@@ -154,6 +152,11 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this, "아이템 조회 실패: $exception", Toast.LENGTH_SHORT).show()
             }
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        snapshotListener?.remove()
+    }
+
     private fun updateList() {
         itemsCollectionRef.get().addOnSuccessListener {
             val products = mutableListOf<Product>()
@@ -176,10 +179,6 @@ class HomeActivity : AppCompatActivity() {
             }
             productAdapter?.updateList(products)
         }
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        snapshotListener?.remove()
     }
 
     fun displayImage() {
