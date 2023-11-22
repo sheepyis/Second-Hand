@@ -9,46 +9,29 @@ import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MessageAdapter(private val context: Context, private val messages: List<Message>) :
+class MessageAdapter(private val context: Context, private val messagesList: List<Message>) :
     RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
-    inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val senderTextView: TextView = itemView.findViewById(R.id.senderTextView)
-        val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
-        val timestampTextView: TextView = itemView.findViewById(R.id.timestampTextView)
+    class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val sender: TextView = itemView.findViewById(R.id.sender)
+        val product: TextView = itemView.findViewById(R.id.product)
+        val content: TextView = itemView.findViewById(R.id.content)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_message, parent, false)
-        return MessageViewHolder(view)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_message, parent, false)
+        return MessageViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        val message = messages[position]
+        val currentItem = messagesList[position]
 
-        holder.senderTextView.text = message.sender
-        holder.contentTextView.text = message.content
-        holder.timestampTextView.text = formatTimestamp(message.timestamp)
+        holder.sender.text = "${currentItem.sender}님:"
+        //holder.product.text = currentItem.product
+        holder.content.text = currentItem.content
     }
 
     override fun getItemCount(): Int {
-        return messages.size
+        return messagesList.size
     }
-
-    private fun formatTimestamp(timestamp: Long): String {
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = timestamp
-        return sdf.format(calendar.time)
-    }
-
-
-    fun addMessage(message: Message) {
-        val mutableMessages = messages.toMutableList()
-
-        mutableMessages.add(message)
-        notifyItemInserted(messages.size - 1)
-    }
-
-
 }
