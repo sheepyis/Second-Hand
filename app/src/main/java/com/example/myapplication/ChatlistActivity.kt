@@ -44,9 +44,7 @@ class ChatlistActivity : AppCompatActivity() {
                     val timestamp = document.getLong("timestamp") ?: 0
 
                     val message = Message(sender, receiver, product, content, timestamp)
-                    if(Nickname==receiver) {
-                        messagesList.add(message)
-                    }
+                    messagesList.add(message)
                 }
 
                 val adapter = MessageAdapter(this, messagesList)
