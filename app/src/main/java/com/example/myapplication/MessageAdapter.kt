@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import java.text.SimpleDateFormat
-import java.util.*
+
 class MessageAdapter(private val context: Context, private val messagesList: List<Message>) :
     RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
     private lateinit var firestore: FirebaseFirestore
     private lateinit var nickname: String
+
+
 
     init {
         // 어댑터 초기화 시에 닉네임을 가져옴
@@ -51,6 +52,7 @@ class MessageAdapter(private val context: Context, private val messagesList: Lis
         return MessageViewHolder(itemView)
     }
 
+
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         // 닉네임이 초기화되지 않았으면 아무 작업도 하지 않음
         if (!::nickname.isInitialized) return
@@ -60,6 +62,13 @@ class MessageAdapter(private val context: Context, private val messagesList: Lis
             holder.sender.text = "${currentItem.sender}님:"
             holder.product.text = currentItem.product
             holder.content.text = currentItem.content
+        }
+        else {
+            val params = holder.itemView.layoutParams as RecyclerView.LayoutParams
+            params.height = 0
+            params.width = 0
+            holder.itemView.layoutParams = params
+            holder.itemView.visibility = View.INVISIBLE
         }
     }
 
