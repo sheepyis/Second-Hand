@@ -27,6 +27,7 @@ class ChatlistActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
 
         firestore = Firebase.firestore
+        val Nickname = intent.getStringExtra("Nickname")
 
         // Firestore에서 메시지 데이터 가져오기
         firestore.collection("messages")
@@ -43,7 +44,9 @@ class ChatlistActivity : AppCompatActivity() {
                     val timestamp = document.getLong("timestamp") ?: 0
 
                     val message = Message(sender, receiver, product, content, timestamp)
-                    messagesList.add(message)
+                    if(Nickname==receiver) {
+                        messagesList.add(message)
+                    }
                 }
 
                 val adapter = MessageAdapter(this, messagesList)

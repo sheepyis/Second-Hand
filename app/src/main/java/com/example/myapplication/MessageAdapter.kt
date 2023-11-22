@@ -14,6 +14,7 @@ class MessageAdapter(private val context: Context, private val messagesList: Lis
 
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val sender: TextView = itemView.findViewById(R.id.sender)
+        //val receiver: TextView = itemView.findViewById(R.id.receiver)
         val product: TextView = itemView.findViewById(R.id.product)
         val content: TextView = itemView.findViewById(R.id.content)
     }
