@@ -3,8 +3,13 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import android.graphics.BitmapFactory
+import android.view.View
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.ToggleButton
@@ -38,29 +43,12 @@ class HomeActivity : AppCompatActivity() {
     private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)} //물건 제목
     private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)} //물건 가격
     private val sellerTextView by lazy {findViewById<TextView>(R.id.productSeller)} //물건 판매자
-    private val textSnapshotListener by lazy { findViewById<TextView>(R.id.textSnapshotListener) }
 
-    private val filterButton by lazy { findViewById<ToggleButton>(R.id.toggleButton) }
-    private val Button by lazy { findViewById<ToggleButton>(R.id.toggleButton2) }
-    private var showfilterProduct : Boolean = false;
-    private var showProduct : Boolean = false;
+    private val filterButton by lazy {findViewById<Spinner>(R.id.filterButton)}
+    private var filterSelectPosition: Int =0;
 
     override fun onStart() {
         super.onStart()
-
-        //스냅샷 리스너 - 모든 물건 목록 띄움
-        snapshotListener = itemsCollectionRef.addSnapshotListener { snapshot, error ->
-            textSnapshotListener.text = StringBuilder().apply {
-                for (doc in snapshot!!.documentChanges) {
-                    append("${doc.type} ${doc.document.id} ${doc.document.data}")
-                }
-            }
-        }
-        // sanpshot listener for single item
-        /*
-        itemsCollectionRef.document("1").addSnapshotListener { snapshot, error ->
-            Log.d(TAG, "${snapshot?.id} ${snapshot?.data}")
-        }*/
     }
 
     override fun onStop() {
@@ -88,25 +76,26 @@ class HomeActivity : AppCompatActivity() {
         recyclerView.adapter = productAdapter
         updateList()
 
-        filterButton.setOnClickListener {
-            if(showfilterProduct){
-                showfilterProduct=!showfilterProduct
-                filterButton.text = "판매중 상품"
-            }else if(!showfilterProduct){
-                showfilterProduct=!showfilterProduct
-                filterButton.text="전체 상품"
+        var data = resources.getStringArray(R.array.filterButton)
+        var filterAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data)
+        filterButton.adapter = filterAdapter
+        filterButton.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+               when(p2){
+                   0->{
+                       filterSelectPosition =0
+                   }
+                   1->{
+                       filterSelectPosition=1
+                   }
+                   2->{
+                       filterSelectPosition=2
+                   }
+               }
+                updateList()
             }
-            updateList()
-        }
-        Button.setOnClickListener {
-            if(showProduct) {
-                showProduct = !showProduct
-                Button.text = "판매완료상품"
-            }else if(!showProduct){
-                showProduct = !showProduct
-                Button.text = "전체 상품"
+            override fun onNothingSelected(p0: AdapterView<*>?) {
             }
-            updateList()
         }
 
 
@@ -168,22 +157,21 @@ class HomeActivity : AppCompatActivity() {
     private fun updateList() {
         itemsCollectionRef.get().addOnSuccessListener {
             val products = mutableListOf<Product>()
-            if(showfilterProduct){
+            if(filterSelectPosition == 0){
+                for (doc in it) {
+                    products.add(Product(doc))
+                }
+            }else if(filterSelectPosition ==1){
                 for(doc in it){
                     if(Product(doc).sold=="true"){
                         products.add(Product(doc))
                     }
                 }
-            }else if(showProduct){
-                for(doc in it){
+            }else if(filterSelectPosition ==2){
+                for (doc in it) {
                     if(Product(doc).sold=="false"){
                         products.add(Product(doc))
                     }
-                }
-            }
-            else{
-                for (doc in it) {
-                    products.add(Product(doc))
                 }
             }
             productAdapter?.updateList(products)
