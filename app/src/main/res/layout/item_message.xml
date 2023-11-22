@@ -30,8 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="상품판매글 제목"
-                android:textColor="#9D9D9D"
-                android:textSize="18sp"
+                android:textColor="#3B7600"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -40,8 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="안녕하세요~~~"
-                android:textColor="#6A6A6C"
-                android:textSize="13sp" />
+                android:textColor="#6AA82B"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>
