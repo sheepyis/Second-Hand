@@ -71,6 +71,7 @@ class ChatActivity : AppCompatActivity() {
                 //messageAdapter.addMessage(message)
                 saveMessage(message) // Firestore에 메시지 저장 로직 추가
                 messageEditText.text.clear()
+                Toast.makeText(this, "메세지 전송 성공!!", Toast.LENGTH_SHORT).show()
             }
         }
 
