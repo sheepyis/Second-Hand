@@ -146,6 +146,7 @@ class HomeActivity : AppCompatActivity() {
         val imageButton3 = findViewById<ImageButton>(R.id.imageButton3)
         imageButton3.setOnClickListener{
             val chatIntent = Intent(this, ChatlistActivity::class.java)
+            intent.putExtra("Nickname", nicknameTextView.text)
             startActivity(chatIntent)
         }
 
