@@ -12,14 +12,13 @@
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="269dp"
-        android:text="Chat"
+        android:layout_marginEnd="192dp"
+        android:text="MessageList"
         android:textAlignment="viewStart"
         android:textColor="#7EAD4F"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
@@ -46,19 +45,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/prev" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="331dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/prev"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/myprofile" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
