@@ -41,6 +41,7 @@ class HomeActivity : AppCompatActivity() {
     private val titleTextView by lazy { findViewById<TextView>(R.id.productTitle)} //물건 제목
     private val priceTextView by lazy {findViewById<TextView>(R.id.productPrice)} //물건 가격
     private val sellerTextView by lazy {findViewById<TextView>(R.id.productSeller)} //물건 판매자
+    private val logoutButton by lazy {findViewById<ImageView>(R.id.imageView6)}
 
 
     private val filterButton by lazy {findViewById<Spinner>(R.id.filterButton)}
@@ -95,6 +96,14 @@ class HomeActivity : AppCompatActivity() {
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
+        }
+
+        logoutButton.setOnClickListener {
+            Firebase.auth.signOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
         // 홈 화면에서 닉네임 표시
