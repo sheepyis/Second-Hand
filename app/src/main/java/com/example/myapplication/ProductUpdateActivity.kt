@@ -26,9 +26,12 @@ class ProductUpdateActivity: AppCompatActivity() {
         setContentView(R.layout.update_product)
 
         val id = intent.getStringExtra("id")//아이디 값 - 수정하기 할때 사용할꺼임
-        var sold = intent.getStringExtra("sold")
+        val oldSold = intent.getStringExtra("oldSold")
+        val oldPrice = intent.getStringExtra("oldPrice")
 
-        val updateButton = findViewById<Button>(R.id.updateBack)
+        //사용자수정가넝
+        var newSold = oldSold
+
 
         updateButton.setOnClickListener{
             val intent = Intent(this, HomeActivity::class.java)
@@ -36,10 +39,10 @@ class ProductUpdateActivity: AppCompatActivity() {
         }
 
         producttitle.text = intent.getStringExtra("title") //제목
-        productprice.text = intent.getStringExtra("price").toString() //가격
+        productprice.text = oldPrice.toString() //가격
         productcontent.text = intent.getStringExtra("detail") //디테일
 
-        if (sold == "true") {
+        if (oldSold == "true") {
             switchcontent.text = "판매중"
             switchcontent.isChecked = true
         } else {
@@ -48,7 +51,7 @@ class ProductUpdateActivity: AppCompatActivity() {
         }
 
         switchcontent.setOnCheckedChangeListener { _, isChecked ->
-            sold = if (isChecked) {
+            newSold = if (isChecked) {
                 "true"
             } else {
                 "false"
@@ -62,10 +65,8 @@ class ProductUpdateActivity: AppCompatActivity() {
         }
 
         updateButton.setOnClickListener {
-            val newPriceStr = productprice.text.toString()
-
-            if (newPriceStr.isNotEmpty()) {
-                val newPrice = newPriceStr.toInt()
+            if (oldPrice!=productprice.text.toString()||newSold!=oldSold) {
+                val newPrice = productprice.text.toString().toInt()
                 val newSale = switchcontent.isChecked
 
 
@@ -85,7 +86,7 @@ class ProductUpdateActivity: AppCompatActivity() {
                         Toast.makeText(this, "수정 완료에 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
                     }
             } else {
-                Toast.makeText(this, "모든 필드를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "가격이나 판매여부를 수정해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
     }
