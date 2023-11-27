@@ -19,6 +19,7 @@ class ProductUpdateActivity: AppCompatActivity() {
     private val productcontent by lazy { findViewById<TextView>(R.id.textView2) } //내용
     private val productprice by lazy { findViewById<TextView>(R.id.editTextText3) } //가격
     private val switchcontent by lazy { findViewById<Switch>(R.id.switch2) } //스위치
+    private val backButton by lazy{ findViewById<Button>(R.id.updateBack) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,15 +32,8 @@ class ProductUpdateActivity: AppCompatActivity() {
 
         //사용자수정가넝
         var newSold = oldSold
-
-
-        updateButton.setOnClickListener{
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-        }
-
         producttitle.text = intent.getStringExtra("title") //제목
-        productprice.text = oldPrice.toString() //가격
+        productprice.text = oldPrice.toString() //이것도 사용자 수정가넝 (밑에서 기존 데이터 값이랑 같은지 다른지 비교)
         productcontent.text = intent.getStringExtra("detail") //디테일
 
         if (oldSold == "true") {
@@ -63,7 +57,10 @@ class ProductUpdateActivity: AppCompatActivity() {
                 "판매완료"
             }
         }
-
+        backButton.setOnClickListener{
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
         updateButton.setOnClickListener {
             if (oldPrice!=productprice.text.toString()||newSold!=oldSold) {
                 val newPrice = productprice.text.toString().toInt()
