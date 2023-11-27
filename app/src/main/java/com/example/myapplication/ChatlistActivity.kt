@@ -1,9 +1,10 @@
 package com.example.myapplication
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,13 @@ class ChatlistActivity : AppCompatActivity() {
 
         firestore = Firebase.firestore
         val Nickname = intent.getStringExtra("Nickname")
+        val messageBackButton = findViewById<Button>(R.id.messageBack)
+
+        messageBackButton.setOnClickListener{
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
 
         // Firestore에서 메시지 데이터 가져오기
         firestore.collection("messages")
