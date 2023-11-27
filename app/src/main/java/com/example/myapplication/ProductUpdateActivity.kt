@@ -28,6 +28,13 @@ class ProductUpdateActivity: AppCompatActivity() {
         val id = intent.getStringExtra("id")//아이디 값 - 수정하기 할때 사용할꺼임
         var sold = intent.getStringExtra("sold")
 
+        val updateButton = findViewById<Button>(R.id.updateBack)
+
+        updateButton.setOnClickListener{
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
         producttitle.text = intent.getStringExtra("title") //제목
         productprice.text = intent.getStringExtra("price").toString() //가격
         productcontent.text = intent.getStringExtra("detail") //디테일
