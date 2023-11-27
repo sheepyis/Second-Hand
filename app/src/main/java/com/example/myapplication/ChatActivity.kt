@@ -2,6 +2,7 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -9,8 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -42,6 +41,12 @@ class ChatActivity : AppCompatActivity() {
         val userId = user?.uid ?: ""
         val sellerNickname = intent.getStringExtra("sellerNickname")
         val productTitle = intent.getStringExtra("productTitle")
+        val chatBackButton = findViewById<Button>(R.id.messageBack)
+
+        chatBackButton.setOnClickListener{
+            val intent = Intent(this, ProductDetailActivity::class.java)
+            startActivity(intent)
+        }
 
         firestore.collection("users")
             .document(userId)

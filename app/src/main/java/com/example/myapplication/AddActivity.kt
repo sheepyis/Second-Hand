@@ -32,6 +32,12 @@ class AddActivity : AppCompatActivity() {
         val productCollectionRef = db.collection("product")
 
         val addButton = findViewById<Button>(R.id.addButton)
+        val addBackButton = findViewById<Button>(R.id.messageBack)
+
+        addBackButton.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
 
         addButton.setOnClickListener {
             val currentUser = firebaseAuth.currentUser

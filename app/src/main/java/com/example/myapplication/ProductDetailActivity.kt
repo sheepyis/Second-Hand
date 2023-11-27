@@ -24,6 +24,13 @@ class ProductDetailActivity : AppCompatActivity(){
         val sold = intent.getStringExtra("sold") //됨
         val detail = intent.getStringExtra("detail") //됨
 
+        val productBackButton = findViewById<Button>(R.id.productBack)
+
+        productBackButton.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
         titleTextView.text = title
         priceTextView.text = price.toString()
         detailTextView.text = detail
