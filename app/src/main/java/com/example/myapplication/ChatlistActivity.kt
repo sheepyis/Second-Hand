@@ -35,8 +35,6 @@ class ChatlistActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
-
-
         // Firestore에서 메시지 데이터 가져오기
         firestore.collection("messages")
             .orderBy("timestamp", Query.Direction.ASCENDING)

@@ -42,10 +42,8 @@ class ChatActivity : AppCompatActivity() {
         val sellerNickname = intent.getStringExtra("sellerNickname")
         val productTitle = intent.getStringExtra("productTitle")
         val chatBackButton = findViewById<Button>(R.id.messageBack)
-
         chatBackButton.setOnClickListener{
-            val intent = Intent(this, ProductDetailActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         firestore.collection("users")
