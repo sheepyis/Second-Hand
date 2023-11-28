@@ -91,8 +91,8 @@ class ProductAdapter(private val context: Context, private var productList: List
                 val UpdateIntent = Intent(context,ProductUpdateActivity::class.java )
                 UpdateIntent.putExtra("id",product.id)
                 UpdateIntent.putExtra("title",product.title)
-                UpdateIntent.putExtra("price",product.price.toString())
-                UpdateIntent.putExtra("sold",product.sold)
+                UpdateIntent.putExtra("oldPrice",product.price.toString())
+                UpdateIntent.putExtra("oldSold",product.sold)
                 UpdateIntent.putExtra("detail",product.detail)
                 context.startActivity(UpdateIntent)
             }
