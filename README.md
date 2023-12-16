@@ -20,7 +20,7 @@
       <tr>
         <td align="center"><a href="https://github.com/hyeonda02"><img src="https://github.com/hyeonda02.png" width="150px;" alt="강다현"/><br /><sub><b>2171317 강다현</b></sub></a><br /></td>
         <td align="center"><a href="https://github.com/yewon0219"><img src="https://github.com/yewon0219.png" width="150px;" alt="김예원"/><br /><sub><b>2171170 김예원</b></sub></a><br /></td>
-        <td align="center"><a href="https://github.com/sheepyis"><img src="https://github.com/sheepyis.png" width="150px;" alt="양인서"/><br /><sub><b>2171335 양인서</b></sub></a><br /></td>
+        <td align="center"><a href="https://github.com/sheepyis"><img src="https://github.com/sheepyis.png" width="150px;" alt="양인서"/><br /><sub><b>2171339 양인서</b></sub></a><br /></td>
         <td align="center"><a href="https://github.com/0hyujin"><img src="https://github.com/0hyujin.png" width="150px;" alt="오유진"/><br /><sub><b>2171431 오유진</b></sub></a><br /></td>
       </tr>
     </tbody>
